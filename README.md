@@ -173,39 +173,40 @@ spring.jpa.properties.hibernate.format_sql=true
 Tomando como base la especificación del esquema relacional:
 
 > [!NOTE]
-> 📄 **Documento de especificación:** `Modelo Lógico - Sistema de Biblioteca.pdf` define **7 tablas relacionales** en la base de datos:
+> 📄 **Documento de especificación:** `Modelo Lógico - Sistema de Biblioteca.pdf` define **7 tablas relacionales** en la base de datos (con prefijo `tb_` en MySQL `biblioteca_db`):
 > 
-> 1. `LIVRO`
-> 2. `AUTOR`
-> 3. `CATEGORIA`
-> 4. `USUARIO`
-> 5. `EMPRESTIMO`
-> 6. `ITEM_EMPRESTIMO`
-> 7. `LIVRO_AUTOR` (tabla asociativa de relación N:N)
+> 1. `tb_livro`
+> 2. `tb_autor`
+> 3. `tb_categoria`
+> 4. `tb_usuario`
+> 5. `tb_emprestimo`
+> 6. `tb_item_emprestimo`
+> 7. `tb_livro_autor` (tabla asociativa de relación N:N)
 
 ### Diagrama Entidad-Relación
 
 ```mermaid
 erDiagram
-    CATEGORIA ||--o{ LIVRO : "clasifica"
-    AUTOR }o--o{ LIVRO : "escribe (tb_livro_autor)"
-    USUARIO ||--o{ EMPRESTIMO : "realiza"
-    EMPRESTIMO ||--|{ ITEM_EMPRESTIMO : "contiene"
-    LIVRO ||--o{ ITEM_EMPRESTIMO : "prestado_en"
+    tb_categoria ||--o{ tb_livro : "clasifica"
+    tb_autor ||--o{ tb_livro_autor : "posee"
+    tb_livro ||--o{ tb_livro_autor : "compuesto_por"
+    tb_usuario ||--o{ tb_emprestimo : "realiza"
+    tb_emprestimo ||--|{ tb_item_emprestimo : "contiene"
+    tb_livro ||--o{ tb_item_emprestimo : "prestado_en"
 
-    CATEGORIA {
+    tb_categoria {
         bigint id PK
         varchar nome
         varchar descricao
     }
-    AUTOR {
+    tb_autor {
         bigint id PK
         varchar nome
         date data_nascimento
         varchar nacionalidade
         text biografia
     }
-    LIVRO {
+    tb_livro {
         bigint id PK
         varchar isbn UK
         varchar titulo
@@ -216,7 +217,11 @@ erDiagram
         int quantidade_disponivel
         bigint categoria_id FK
     }
-    USUARIO {
+    tb_livro_autor {
+        bigint livro_id FK
+        bigint autor_id FK
+    }
+    tb_usuario {
         bigint id PK
         varchar nome
         varchar cpf UK
@@ -226,7 +231,7 @@ erDiagram
         varchar endereco
         bit ativo
     }
-    EMPRESTIMO {
+    tb_emprestimo {
         bigint id PK
         date data_emprestimo
         date data_devolucao_prevista
@@ -235,7 +240,7 @@ erDiagram
         decimal valor_multa
         bigint usuario_id FK
     }
-    ITEM_EMPRESTIMO {
+    tb_item_emprestimo {
         bigint id PK
         bigint emprestimo_id FK
         bigint livro_id FK
@@ -249,8 +254,8 @@ erDiagram
 En la práctica con **Spring Data JPA**, se implementan **6 clases Java**:
 
 - **5 entidades de negocio principales:** `Categoria`, `Usuario`, `Autor`, `Livro` y `Emprestimo`.
-- **1 entidad asociativa explícita (`ItemEmprestimo`):** Mapea la relación intermedia entre un préstamo y un libro.
-- **`LIVRO_AUTOR`:** **No requiere su propia clase Java**. Dado que es una relación N:N pura sin atributos adicionales (solo claves foráneas), JPA la genera automáticamente en la base de datos mediante `@ManyToMany` con `@JoinTable(name = "tb_livro_autor")`.
+- **1 entidad asociativa explícita (`ItemEmprestimo`):** Mapea la relación intermedia entre un préstamo y un libro (`tb_item_emprestimo`).
+- **`tb_livro_autor` (`LIVRO_AUTOR`):** **No requiere su propia clase Java**. Dado que es una relación N:N pura sin atributos adicionales (solo claves foráneas `livro_id` y `autor_id`), JPA la genera automáticamente en la base de datos mediante `@ManyToMany` con `@JoinTable(name = "tb_livro_autor")`.
 
 ---
 
