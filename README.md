@@ -17,6 +17,25 @@
 
 ---
 
+## 📋 Prerrequisitos
+
+Antes de clonar, compilar y ejecutar este proyecto, es necesario tener instalado y configurado en tu equipo el siguiente software:
+
+1. **Java Development Kit (JDK 21 o superior, recomendado JDK 25):**
+   - Motor y compilador de Java requeridos para construir y ejecutar la aplicación Spring Boot.
+   - Enlace oficial: [Java Downloads | Oracle América Latina](https://www.oracle.com/latam/java/technologies/downloads/)
+2. **XAMPP (Apache + MySQL / MariaDB + phpMyAdmin):**
+   - Paquete de servidor local que suministra el servicio de base de datos relacional MySQL y la interfaz web phpMyAdmin. Es indispensable iniciar el servicio MySQL en el puerto `3306` para la persistencia de datos.
+   - Enlace oficial: [Download XAMPP](https://www.apachefriends.org/es/download.html)
+3. **IntelliJ IDEA (Community o Ultimate Edition):**
+   - IDE recomendado para el desarrollo de proyectos con Maven, Java y Spring Boot.
+   - Enlace oficial: [Descargar IntelliJ IDEA](https://www.jetbrains.com/es-es/idea/download/?section=windows)
+
+> [!IMPORTANT]  
+> **Levantar el servicio de MySQL en XAMPP:** Antes de iniciar la aplicación desde tu IDE o consola, abre el **Panel de Control de XAMPP** y haz clic en el botón **Start** junto al módulo **MySQL** para asegurar que el puerto `3306` esté en escucha.
+
+---
+
 ## 🛠️ Stack & Herramientas
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
@@ -41,6 +60,8 @@
 
 ## 📑 Tabla de Contenidos
 
+- [Prerrequisitos](#-prerrequisitos)
+- [Stack & Herramientas](#️-stack--herramientas)
 1. [Inicialización e Infraestructura del Proyecto](#1-inicialización-e-infraestructura-del-proyecto)
    - [1.1. Generar la estructura base con Spring Initializr](#11-generar-la-estructura-base-con-spring-initializr)
    - [1.2. Seleccionar las dependencias necesarias](#12-seleccionar-las-dependencias-necesarias)
@@ -1193,6 +1214,9 @@ Al ejecutar `mvn spring-boot:run` o iniciar la clase `BibliotecaApplication` des
 
 | Recurso | Enlace Directo | Descripción |
 | :--- | :--- | :--- |
+| **Descargar XAMPP** | [![XAMPP](https://img.shields.io/badge/XAMPP-Descargar-FB7A24?style=flat-square&logo=xampp&logoColor=white)](https://www.apachefriends.org/es/download.html) | Servidor local Apache + MySQL + phpMyAdmin |
+| **Descargar IntelliJ IDEA** | [![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-Descargar-000000?style=flat-square&logo=intellij-idea&logoColor=white)](https://www.jetbrains.com/es-es/idea/download/?section=windows) | IDE recomendado para desarrollo en Java y Spring Boot |
+| **Descargar Java JDK** | [![Java](https://img.shields.io/badge/Java_JDK-Descargar-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://www.oracle.com/latam/java/technologies/downloads/) | Kit de desarrollo oficial Oracle JDK para Java 21+ / 25 |
 | **Spring Initializr** | [![Spring Initializr](https://img.shields.io/badge/start.spring.io-Visitar-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://start.spring.io/) | Asistente de configuración de proyectos Spring Boot |
 | **Spring Data JPA** | [![Spring Data JPA](https://img.shields.io/badge/Documentación_Oficial-Ver-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/projects/spring-data-jpa) | Guías oficiales de repositorios y Derived Queries |
 | **phpMyAdmin Local** | [![phpMyAdmin](https://img.shields.io/badge/Panel_Local-Acceder-6C78AF?style=flat-square&logo=phpmyadmin&logoColor=white)](http://localhost/phpmyadmin) | Administrador visual de base de datos MySQL en localhost |
